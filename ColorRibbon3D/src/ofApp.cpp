@@ -33,8 +33,9 @@ void ofApp::draw(){
     if(usecamera){
         camera.begin();
     }
-    
-    ofSetColor(0);
+// comment out "ofSetColor(0)"
+//    ofSetColor(0);
+    ofSetColor(ofColor::fromHsb(ofGetFrameNum() % 256, 255, 255));
     //do the same thing from the first example...
     ofMesh mesh;
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
