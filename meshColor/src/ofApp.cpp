@@ -4,26 +4,23 @@
 void ofApp::setup(){
     ofBackground(0);
     ofToggleFullscreen();
+    ofSetWindowTitle("OF_PRIMITIVE_TRIANGLE_FAN");
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-    corners[0] = ofVec3f(0, 0, 0);
-    corners[1] = ofVec3f(0, ofGetHeight(), 0);
-    corners[2] = ofVec3f(ofGetWidth(), 0, 0);
-    corners[3] = ofVec3f(ofGetWidth(), ofGetHeight(), 0);
-    int target = 0;
+    vertices.push_back(ofVec3f(0, 0, 0));
+    vertices.push_back(ofVec3f(0, ofGetHeight(), 0));
+    vertices.push_back(ofVec3f(ofGetWidth(), 0, 0));
+    vertices.push_back(ofVec3f(ofGetWidth(), ofGetHeight(), 0));
+    for (int i = 0; i < vertices.size(); i++) {
+        colors.push_back(ofFloatColor::fromHsb(ofRandom(0.2, 0.9), 1.0, 1.0));
+    }
     // 頂点情報を初期化
     for (int i = 0; i < meshSize; i++) {
-        if (i % (meshSize / 4) == 0) {
-            vertices.push_back(corners[target]);
-            colors.push_back(ofFloatColor::fromHsb(ofRandom(0.3, 0.8), 1.0, 1.0));
-            target++;
-        }
         vertices.push_back(ofVec3f(ofRandomWidth(), ofRandomHeight(), ofRandom(-ofGetWidth() / 2, ofGetWidth() / 2)));
         colors.push_back(ofFloatColor::fromHsb(ofRandom(0, 1.0), ofRandom(0.8, 1.0), ofRandom(0.8, 1.0)));
     }
-    // 各頂点の移動速度と色変化率を決定
+    // 各頂点の色変化率を決定
     for (int i = 0; i < vertices.size(); i++) {
-        velocity.push_back(ofVec3f(ofRandom(-2.0, 2.0), ofRandom(-2.0, 2.0), 0.0));
-        diffRatio.push_back(sin(ofRandom(-PI, PI)) * 0.01);
+        diffRatio.push_back(sin(ofRandom(-PI, PI)) * 0.005);
     }
     // 中心を判定
     for (int i = 0; i < vertices.size(); i++) {
@@ -38,26 +35,17 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     mesh.clear();
-//    for (int i = 0; i < vertices.size(); i++) {
-//        vertices[i] += velocity[i];
-//        if (vertices[i].x < 0 || vertices[i].x > ofGetWidth()) {
-//            velocity[i].x *= -1.0;
-//        }
-//        if (vertices[i].y < 0 || vertices[i].y > ofGetHeight()) {
-//            velocity[i].y *= -1;
-//        }
-//    }
     // 色情報を変化させる
     for (int i = 0; i < vertices.size(); i++) {
         float hue = colors[i].getHue();
-        hue = (hue + diffRatio[i] < 1.0)? hue + diffRatio[i] : 0.0;
+        hue = (hue + diffRatio[i] <= 1.0)? hue + diffRatio[i] : 0.0;
         colors[i].setHue(hue);
     }
     
     mesh.addVertices(vertices);
     mesh.addColors(colors);
-    orbit.x = 600 * sin(ofGetElapsedTimef());
-    orbit.y = 600 * cos(ofGetElapsedTimef());
+    orbit.x = 600 * sin(ofGetElapsedTimef() / 15.0);
+    orbit.y = 600 * cos(ofGetElapsedTimef() / 15.0);
     cam.setPosition(orbit + middle);
     cam.lookAt(middle);
 }
