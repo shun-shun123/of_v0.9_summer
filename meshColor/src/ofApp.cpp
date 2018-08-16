@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(0);
+    ofToggleFullscreen();
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
     corners[0] = ofVec3f(0, 0, 0);
     corners[1] = ofVec3f(0, ofGetHeight(), 0);
@@ -30,22 +31,22 @@ void ofApp::setup(){
     }
     middle /= float(vertices.size());
     cam.lookAt(middle);
-    cam.setPosition(0.0, 0.0, 700.0);
+    cam.setPosition(0.0, 0.0, 350.0);
     orbit = cam.getPosition();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     mesh.clear();
-    for (int i = 0; i < vertices.size(); i++) {
-        vertices[i] += velocity[i];
-        if (vertices[i].x < 0 || vertices[i].x > ofGetWidth()) {
-            velocity[i].x *= -1.0;
-        }
-        if (vertices[i].y < 0 || vertices[i].y > ofGetHeight()) {
-            velocity[i].y *= -1;
-        }
-    }
+//    for (int i = 0; i < vertices.size(); i++) {
+//        vertices[i] += velocity[i];
+//        if (vertices[i].x < 0 || vertices[i].x > ofGetWidth()) {
+//            velocity[i].x *= -1.0;
+//        }
+//        if (vertices[i].y < 0 || vertices[i].y > ofGetHeight()) {
+//            velocity[i].y *= -1;
+//        }
+//    }
     // 色情報を変化させる
     for (int i = 0; i < vertices.size(); i++) {
         float hue = colors[i].getHue();
@@ -55,9 +56,9 @@ void ofApp::update(){
     
     mesh.addVertices(vertices);
     mesh.addColors(colors);
-    orbit.x = 300 * sin(ofGetElapsedTimef());
-    orbit.y = 300 * cos(ofGetElapsedTimef());
-    cam.setPosition(orbit);
+    orbit.x = 600 * sin(ofGetElapsedTimef());
+    orbit.y = 600 * cos(ofGetElapsedTimef());
+    cam.setPosition(orbit + middle);
     cam.lookAt(middle);
 }
 
@@ -66,7 +67,7 @@ void ofApp::draw(){
     cam.begin();
     mesh.draw();
     ofBoxPrimitive box = ofBoxPrimitive(100, 100, 100);
-    box.setPosition(orbit);
+    box.setPosition(orbit + middle);
 //    box.draw();
     cam.end();
 }

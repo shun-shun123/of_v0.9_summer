@@ -22,7 +22,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     ofMesh mesh;
-    int meshSize = 200;
+    int meshSize = 300;
     vector<ofVec3f> vertices;
     vector<ofFloatColor> colors;
     vector<ofVec3f> velocity;
