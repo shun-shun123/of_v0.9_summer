@@ -26,6 +26,7 @@ class ofApp : public ofBaseApp{
     vector<ofVec3f> vertices;
     vector<ofFloatColor> colors;
     vector<ofVec3f> velocity;
+    vector<float> diffRatio;
     ofVec3f corners[4];
     ofCamera cam;
     ofEasyCam easyCam;

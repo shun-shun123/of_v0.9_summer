@@ -9,6 +9,7 @@ void ofApp::setup(){
     corners[2] = ofVec3f(ofGetWidth(), 0, 0);
     corners[3] = ofVec3f(ofGetWidth(), ofGetHeight(), 0);
     int target = 0;
+    // 頂点情報を初期化
     for (int i = 0; i < meshSize; i++) {
         if (i % (meshSize / 4) == 0) {
             vertices.push_back(corners[target]);
@@ -18,9 +19,12 @@ void ofApp::setup(){
         vertices.push_back(ofVec3f(ofRandomWidth(), ofRandomHeight(), ofRandom(-ofGetWidth() / 2, ofGetWidth() / 2)));
         colors.push_back(ofFloatColor::fromHsb(ofRandom(0, 1.0), ofRandom(0.8, 1.0), ofRandom(0.8, 1.0)));
     }
+    // 各頂点の移動速度と色変化率を決定
     for (int i = 0; i < vertices.size(); i++) {
         velocity.push_back(ofVec3f(ofRandom(-2.0, 2.0), ofRandom(-2.0, 2.0), 0.0));
+        diffRatio.push_back(sin(ofRandom(-PI, PI)) * 0.001);
     }
+    // 中心を判定
     for (int i = 0; i < vertices.size(); i++) {
         middle += vertices[i];
     }
@@ -42,6 +46,13 @@ void ofApp::update(){
             velocity[i].y *= -1;
         }
     }
+    // 色情報を変化させる
+    for (int i = 0; i < vertices.size(); i++) {
+        float hue = colors[i].getHue();
+        hue = (hue + diffRatio[i] < 1.0)? hue + diffRatio[i] : 0.0;
+        colors[i].setHue(hue);
+    }
+    
     mesh.addVertices(vertices);
     mesh.addColors(colors);
     orbit.x = 300 * sin(ofGetElapsedTimef());
