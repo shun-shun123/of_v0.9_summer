@@ -22,7 +22,7 @@ void ofApp::setup(){
     // 各頂点の移動速度と色変化率を決定
     for (int i = 0; i < vertices.size(); i++) {
         velocity.push_back(ofVec3f(ofRandom(-2.0, 2.0), ofRandom(-2.0, 2.0), 0.0));
-        diffRatio.push_back(sin(ofRandom(-PI, PI)) * 0.001);
+        diffRatio.push_back(sin(ofRandom(-PI, PI)) * 0.01);
     }
     // 中心を判定
     for (int i = 0; i < vertices.size(); i++) {

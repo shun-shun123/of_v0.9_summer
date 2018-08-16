@@ -32,7 +32,4 @@ class ofApp : public ofBaseApp{
     ofEasyCam easyCam;
     ofVec3f orbit;
     ofVec3f middle;
-    void printCamPosition(ofEasyCam cam) {
-        cout << cam.getPosition() << endl;
-    }
 };
