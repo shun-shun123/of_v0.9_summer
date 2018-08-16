@@ -26,6 +26,7 @@ void ofApp::setup(){
     }
     middle /= float(vertices.size());
     cam.lookAt(middle);
+    cam.setPosition(0.0, 0.0, 700.0);
     orbit = cam.getPosition();
 }
 
@@ -43,18 +44,20 @@ void ofApp::update(){
     }
     mesh.addVertices(vertices);
     mesh.addColors(colors);
-    orbit.x *= 200.0 * sin(ofGetElapsedTimef());
-    orbit.y *= 200.0 * cos(ofGetElapsedTimef());
+    orbit.x = 300 * sin(ofGetElapsedTimef());
+    orbit.y = 300 * cos(ofGetElapsedTimef());
+    cam.setPosition(orbit);
+    cam.lookAt(middle);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    easyCam.begin();
+    cam.begin();
     mesh.draw();
     ofBoxPrimitive box = ofBoxPrimitive(100, 100, 100);
     box.setPosition(orbit);
-    box.draw();
-    easyCam.end();
+//    box.draw();
+    cam.end();
 }
 
 //--------------------------------------------------------------
