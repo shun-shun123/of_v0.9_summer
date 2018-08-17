@@ -20,6 +20,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    void audioIn(float *input, int bufferSize, int nChannels);
 		
     vector<ofVec3f> circles;
     vector<ofFloatColor> colors;
@@ -28,4 +29,7 @@ class ofApp : public ofBaseApp{
     float hue = 0.0;
     ofMesh mesh;
     float rotateZ = 0;
+    ofSoundStream soundStream;
+    float curVol;
+    
 };

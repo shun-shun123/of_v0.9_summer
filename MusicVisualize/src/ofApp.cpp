@@ -10,12 +10,20 @@ void ofApp::setup(){
         colors.push_back(ofFloatColor::fromHsb(1.0 / resolution * i, 1.0, 0.8));
     }
     ofBackground(0);
+    soundStream.setup(this, 0, 1, 44100, 256, 4);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     mesh.clear();
+    vector<ofVec3f> temp;
+    temp.push_back(circles[0]);
+    for (int i = 1; i <= resolution + 1; i++) {
+        temp.push_back(circles[i]);
+        circles[i] *= ofMap(curVol, 0.0, 3.0, 1.0, 20.0);
+    }
     mesh.addVertices(circles);
+    circles = temp;
     for (int i = 1; i <= resolution + 1; i++) {
         colors[i] = ofFloatColor::fromHsb(hue / resolution * i, 1.0, 1.0);
     }
@@ -33,6 +41,15 @@ void ofApp::draw(){
     ofPopMatrix();
 }
 
+//--------------------------------------------------------------
+void ofApp::audioIn(float* input, int bufferSize, int nChannels) {
+    curVol = 0.0;
+    for (int i = 0; i < bufferSize; i++) {
+        curVol += input[i] * input[i];
+    }
+    curVol /= bufferSize;
+    cout << curVol << endl;
+}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
