@@ -44,7 +44,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     switch (key) {
             case ' ':// スペースキーのとき
-                ofPixels* pixels = videoGrabber.getPixels();
+                ofPixels pixels = videoGrabber.getPixels();
                 image.setFromPixels(videoGrabber.getPixels());
                 image.save("pic.png");
             cout << "Successfully Saved" << endl;
