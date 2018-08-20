@@ -22,6 +22,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     ofVideoGrabber videoGrabber;
+    ofImage image;
     int camWidth;
     int camHeight;
 };

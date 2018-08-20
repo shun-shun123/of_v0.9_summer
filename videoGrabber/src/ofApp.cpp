@@ -11,6 +11,7 @@ void ofApp::setup(){
     videoGrabber.setVerbose(true);
 //    videoGrabber.initGrabber(camWidth, camHeight);
     videoGrabber.setup(camWidth, camHeight);
+    image.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
 }
 
 //--------------------------------------------------------------
@@ -41,7 +42,14 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key) {
+            case ' ':// スペースキーのとき
+                ofPixels* pixels = videoGrabber.getPixels();
+                image.setFromPixels(videoGrabber.getPixels());
+                image.save("pic.png");
+            cout << "Successfully Saved" << endl;
+                break;
+    }
 }
 
 //--------------------------------------------------------------
