@@ -1,0 +1,6 @@
+config.make
+openFrameworks-Info.plist
+bin/data/.DS_Store
+bin/data/__pacache__/
+HackU2018.xcodeproj/*
+.DS_Store
