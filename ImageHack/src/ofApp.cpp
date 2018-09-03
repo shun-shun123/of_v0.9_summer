@@ -14,9 +14,9 @@ void ofApp::setup(){
             float green = ofMap(image.getColor(w, h).g, 0, 255, 0, 1.0);
             float blue = ofMap(image.getColor(w, h).b, 0, 255, 0, 1.0);
             colors[h + w * HEIGHT] = ofFloatColor(red, green, blue);
-            points[h + w * HEIGHT] = ofVec3f(w, h, 0);
+            points[h + w * HEIGHT] = ofVec3f(ofRandomWidth(), ofRandomHeight(), ofRandom(-1000));
             temp[h + w * HEIGHT] = ofVec3f(w, h, 0);
-            vel[h + w * HEIGHT] = ofVec3f(ofRandom(-10, 10), ofRandom(-10, 10), 0);
+            vel[h + w * HEIGHT] = ofVec3f(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-5, 5));
         }
     }
     myVbo.setVertexData(points, WIDTH * HEIGHT, GL_DYNAMIC_DRAW);
@@ -48,7 +48,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     if (mode == -1) {
-        image.draw(0, 0);
+//        image.draw(0, 0);
     } else {
         glPointSize(1);
         myVbo.draw(GL_POINTS, 0, WIDTH * HEIGHT);
