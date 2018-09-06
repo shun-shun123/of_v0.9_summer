@@ -3,32 +3,35 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(0);
-    ofEnableAlphaBlending();
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
-    for (int i = 0; i < 10; i++) {
-        bird[i].setup(ofVec2f(ofRandom(-5, 5), ofRandom(-5, 5)), ofVec2f(0, ofRandom(0.1, 1)), ofVec2f(0, 0));
+    ofSetBackgroundAuto(false);
+    ofSetFrameRate(60);
+    
+    gui.setup();
+    gui.add(num.setup("num", NUM, 0, NUM));
+    gui.add(red.setup("red", 1.0, 0, 1.0));
+    gui.add(green.setup("green", 1.0, 0, 1.0));
+    gui.add(blue.setup("blue", 1.0, 0, 1.0));
+    gui.add(alpha.setup("alpha", 1.0, 0, 1.0));
+    
+    for (int i = 0; i < num; i++) {
+        position[i] = ofVec2f(ofRandomWidth(), ofRandomHeight());
+        color[i] = ofFloatColor(red, green, blue, alpha);
     }
+    vbo.setVertexData(position, num, GL_DYNAMIC_DRAW);
+    vbo.setColorData(color, num, GL_DYNAMIC_DRAW);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofVec2f direction;
-    for (int i = 0; i < 10; i++) {
-        attraction[i] = bird[i].getPosition();
-        direction += attraction[i];
-    }
-    direction /= 10;
-    
-    for (int i = 0; i < 10; i++) {
-        bird[i].update(direction - attraction[i]);
+    for (int i = 0; i < num; i++) {
+        
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    for (int i = 0; i < 10; i++) {
-        bird[i].draw();
-    }
+    vbo.draw(GL_POINTS, 0, num);
+    gui.draw();
 }
 
 //--------------------------------------------------------------

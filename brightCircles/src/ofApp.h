@@ -4,6 +4,8 @@
 #include "ofxGui.h"
 #include "Bird.hpp"
 
+static const int NUM = 1000;
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -23,6 +25,14 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    Bird bird[10];
-    ofVec2f attraction[10];
+    ofVbo vbo;
+    ofVec2f position[NUM];
+    ofFloatColor color[NUM];
+    
+    ofxFloatSlider red;
+    ofxFloatSlider green;
+    ofxFloatSlider blue;
+    ofxFloatSlider alpha;
+    ofxIntSlider num;
+    ofxPanel gui;
 };
