@@ -4,14 +4,16 @@
 void ofApp::setup(){
     ofBackground(0);
     ofEnableSmoothing();
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
-    camWidth = 640;
-    camHeight = 360;
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    camWidth = 1280;
+    camHeight = 720;
     
     videoGrabber.setVerbose(true);
-//    videoGrabber.initGrabber(camWidth, camHeight);
-    videoGrabber.setup(camWidth, camHeight);
+    videoGrabber.initGrabber(camWidth, camHeight);
     image.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
+    guiSetup();
 }
 
 //--------------------------------------------------------------
@@ -21,7 +23,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    videoGrabber.draw(200, 0, camWidth, camHeight);
+    ofSetColor(255);
+//    videoGrabber.draw(20, 20);
 
     unsigned char *pixels = videoGrabber.getPixels().getData();
     for (int w = 0; w < camWidth; w += 10) {
@@ -30,25 +33,29 @@ void ofApp::draw(){
             unsigned char r = pixels[(h * camWidth + w) * 3];
             unsigned char g = pixels[(h * camWidth + w) * 3 + 1];
             unsigned char b = pixels[(h * camWidth + w) * 3 + 2];
-            ofSetColor(255, 0, 0, 100);
-            ofDrawCircle(200 + w,camHeight + h,20.0 * (float)r/255.0);
-            ofSetColor(0, 255, 0, 100);
-            ofDrawCircle(200 + w,camHeight + h,20.0 * (float)g/255.0);
-            ofSetColor(0, 0, 255, 100);
-            ofDrawCircle(200 + w,camHeight + h,20.0 * (float)b/255.0);
+            ofSetColor(255, 0, 0, alpha);
+            ofDrawCircle(w, 20 + h,diameter * (float)r/255.0);
+            ofSetColor(0, 255, 0, alpha);
+            ofDrawCircle(w, 20 + h, diameter * (float)g/255.0);
+            ofSetColor(0, 0, 255, alpha);
+            ofDrawCircle(w, 20 + h, diameter * (float)b/255.0);
         }
     }
+    gui.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     switch (key) {
-            case ' ':// スペースキーのとき
-                ofPixels pixels = videoGrabber.getPixels();
-                image.setFromPixels(videoGrabber.getPixels());
-                image.save("pic.png");
+        case 's':
+            videoGrabber.videoSettings();
+            break;
+        case ' ':// スペースキーのとき
+            ofPixels pixels = videoGrabber.getPixels();
+            image.setFromPixels(videoGrabber.getPixels());
+            image.save("pic.png");
             cout << "Successfully Saved" << endl;
-                break;
+            break;
     }
 }
 
@@ -100,4 +107,11 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+void ofApp::guiSetup() {
+    gui.setup();
+    gui.add(diameter.setup("diameter", 20.0, 10.0, 30.0));
+    gui.add(alpha.setup("alpha", 100, 50, 150));
 }
