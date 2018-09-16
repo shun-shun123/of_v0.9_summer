@@ -9,70 +9,6 @@
 		<string>46</string>
 		<key>objects</key>
 		<dict>
-			<key>F6E7D6C01B3F2E112EB0533D</key>
-			<dict>
-				<key>fileRef</key>
-				<string>40C409F696FE990F95E1B9D3</string>
-				<key>isa</key>
-				<string>PBXBuildFile</string>
-			</dict>
-			<key>40C409F696FE990F95E1B9D3</key>
-			<dict>
-				<key>explicitFileType</key>
-				<string>sourcecode.cpp.cpp</string>
-				<key>fileEncoding</key>
-				<string>30</string>
-				<key>isa</key>
-				<string>PBXFileReference</string>
-				<key>name</key>
-				<string>ofxPostGlitch.cpp</string>
-				<key>path</key>
-				<string>../../../addons/ofxPostGlitch/src/ofxPostGlitch.cpp</string>
-				<key>sourceTree</key>
-				<string>SOURCE_ROOT</string>
-			</dict>
-			<key>A15491832FCD72B40A572147</key>
-			<dict>
-				<key>children</key>
-				<array>
-					<string>67DBED026597C0EE427F0379</string>
-					<string>40C409F696FE990F95E1B9D3</string>
-				</array>
-				<key>isa</key>
-				<string>PBXGroup</string>
-				<key>name</key>
-				<string>src</string>
-				<key>sourceTree</key>
-				<string>&lt;group&gt;</string>
-			</dict>
-			<key>D92A719EC4DFB00CB4A3047D</key>
-			<dict>
-				<key>children</key>
-				<array>
-					<string>A15491832FCD72B40A572147</string>
-				</array>
-				<key>isa</key>
-				<string>PBXGroup</string>
-				<key>name</key>
-				<string>ofxPostGlitch</string>
-				<key>sourceTree</key>
-				<string>&lt;group&gt;</string>
-			</dict>
-			<key>67DBED026597C0EE427F0379</key>
-			<dict>
-				<key>explicitFileType</key>
-				<string>sourcecode.c.h</string>
-				<key>fileEncoding</key>
-				<string>30</string>
-				<key>isa</key>
-				<string>PBXFileReference</string>
-				<key>name</key>
-				<string>ofxPostGlitch.h</string>
-				<key>path</key>
-				<string>../../../addons/ofxPostGlitch/src/ofxPostGlitch.h</string>
-				<key>sourceTree</key>
-				<string>SOURCE_ROOT</string>
-			</dict>
 			<key>89449E3044D456F7DE7BEA14</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -442,7 +378,6 @@
 				<key>children</key>
 				<array>
 					<string>480A780D8D0308AE4A368801</string>
-					<string>D92A719EC4DFB00CB4A3047D</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -598,7 +533,6 @@
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
-						<string>../../../addons/ofxPostGlitch/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -658,7 +592,6 @@
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
-						<string>../../../addons/ofxPostGlitch/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -723,7 +656,6 @@
 					<string>483908258D00B98B4BE69F07</string>
 					<string>F285EB3169F1566CA3D93C20</string>
 					<string>837220E80EB56CD44AD27F2A</string>
-					<string>F6E7D6C01B3F2E112EB0533D</string>
 				</array>
 				<key>isa</key>
 				<string>PBXSourcesBuildPhase</string>
@@ -809,7 +741,6 @@
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
-						<string>../../../addons/ofxPostGlitch/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
@@ -859,7 +790,6 @@
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
-						<string>../../../addons/ofxPostGlitch/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
